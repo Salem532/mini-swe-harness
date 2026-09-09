@@ -1,0 +1,6 @@
+# Overlay for local vLLM. Merged after swebench.yaml. Do not commit secrets.
+model:
+  model_kwargs:
+    drop_params: true
+    num_retries: 0
+    timeout: 180

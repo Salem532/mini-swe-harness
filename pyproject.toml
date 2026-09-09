@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mini-swe-harness"
+version = "0.1.0"
+description = "Sidecar Skill / MCP harness for mini-swe-agent"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Li Wanrong"}]
+keywords = ["agents", "mcp", "skills", "mini-swe-agent"]
+dependencies = [
+    "mcp>=1.9",
+    "pyyaml>=6.0",
+    "pydantic>=2.0",
+    "httpx>=0.27",
+    "uvicorn>=0.30",
+    "starlette>=0.38",
+    "python-dotenv>=1.0",
+    "pytest>=8.0",
+]
+
+[project.optional-dependencies]
+host = [
+    "mini-swe-agent>=2.0",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+]
+
+[project.scripts]
+mcp-call = "mini_swe_harness.mcp_client:main"
+mini-swe-harness = "mini_swe_harness.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+    "docker: tests that require a working Docker daemon",
+]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+src = ["src", "tests"]

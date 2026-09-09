@@ -1,0 +1,9 @@
+id: bash-fizz-01
+category: bash
+prompt: |
+  Fix fizzbuzz.fizzbuzz(n) so it matches the visible tests: return "Fizz", "Buzz", "FizzBuzz", or the number as a string.
+fixture: evals/fixtures/bash_fizz_01
+visible_tests: evals/fixtures/bash_fizz_01/tests
+hidden_tests: evals/graders/bash_fizz_01
+timeout_s: 180
+max_steps: 30

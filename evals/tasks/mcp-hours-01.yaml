@@ -1,0 +1,10 @@
+id: mcp-hours-01
+category: mcp
+prompt: |
+  Implement hours.is_open according to TICKET-3301. Visible tests only check the function exists and returns a bool.
+ticket_id: TICKET-3301
+fixture: evals/fixtures/mcp_hours_01
+visible_tests: evals/fixtures/mcp_hours_01/tests
+hidden_tests: evals/graders/mcp_hours_01
+timeout_s: 180
+max_steps: 30

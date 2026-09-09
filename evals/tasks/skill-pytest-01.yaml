@@ -1,0 +1,9 @@
+id: skill-pytest-01
+category: skill
+prompt: |
+  mathops.add is wrong. Make the visible tests that check addition pass. Do not spend the whole budget on unrelated slow tests.
+fixture: evals/fixtures/skill_pytest_01
+visible_tests: evals/fixtures/skill_pytest_01/tests
+hidden_tests: evals/graders/skill_pytest_01
+timeout_s: 180
+max_steps: 30

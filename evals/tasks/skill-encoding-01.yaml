@@ -1,0 +1,10 @@
+id: skill-encoding-01
+category: skill
+prompt: |
+  Fix csvkit.reader.read_rows so it loads the sample CSVs under /tmp if you create them,
+  and so visible tests pass. The function reads a path and returns a list of dicts using the header row.
+fixture: evals/fixtures/skill_encoding_01
+visible_tests: evals/fixtures/skill_encoding_01/tests
+hidden_tests: evals/graders/skill_encoding_01
+timeout_s: 180
+max_steps: 30

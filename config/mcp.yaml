@@ -1,0 +1,11 @@
+servers:
+  - name: ticket
+    transport: stdio
+    command: ["python", "-m", "mini_swe_harness.servers.ticket"]
+    env:
+      TICKET_ROOT: /tickets
+  - name: workspace_fs
+    transport: stdio
+    command: ["python", "-m", "mini_swe_harness.servers.workspace_fs"]
+    env:
+      WORKSPACE_ROOT: /workspace

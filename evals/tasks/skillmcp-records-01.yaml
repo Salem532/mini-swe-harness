@@ -1,0 +1,10 @@
+id: skillmcp-records-01
+category: skill_mcp
+prompt: |
+  Implement records.parse according to TICKET-5501. Visible tests only check the function exists. File-format edge cases matter.
+ticket_id: TICKET-5501
+fixture: evals/fixtures/skillmcp_records_01
+visible_tests: evals/fixtures/skillmcp_records_01/tests
+hidden_tests: evals/graders/skillmcp_records_01
+timeout_s: 180
+max_steps: 30

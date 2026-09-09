@@ -1,0 +1,33 @@
+{
+  "benchmark": "swe-bench-lite",
+  "split": "test",
+  "sample_seed": 20260908,
+  "n_instances": 25,
+  "instance_ids": [
+    "django__django-12700",
+    "sympy__sympy-23117",
+    "sympy__sympy-12171",
+    "django__django-13265",
+    "psf__requests-2148",
+    "sympy__sympy-21614",
+    "sympy__sympy-17630",
+    "sphinx-doc__sphinx-8595",
+    "scikit-learn__scikit-learn-10508",
+    "django__django-12708",
+    "django__django-11133",
+    "sympy__sympy-23262",
+    "django__django-15851",
+    "django__django-14580",
+    "sympy__sympy-15308",
+    "django__django-12184",
+    "django__django-16820",
+    "sympy__sympy-13146",
+    "sympy__sympy-17139",
+    "django__django-13448",
+    "pydata__xarray-4493",
+    "sympy__sympy-12419",
+    "django__django-15790",
+    "django__django-11848",
+    "sympy__sympy-15678"
+  ]
+}

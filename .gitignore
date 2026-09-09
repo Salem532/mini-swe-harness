@@ -1,0 +1,30 @@
+.env
+.venv/
+venv/
+logs/
+.cursor/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+dist/
+build/
+.coverage
+htmlcov/
+
+# Eval artifacts
+evals/results/raw/
+evals/results/workspaces/
+evals/results/*.traj.json
+evals/results/*.log
+evals/results/eval-progress.json
+evals/results/resume-progress.json
+evals/external/**/*.log
+*.traj.json
+
+# Local secrets / models
+*.gguf
+*.safetensors
+weights/

@@ -1,0 +1,83 @@
+{
+  "benchmark": "swe-bench-lite",
+  "n_instances": 25,
+  "instance_ids": [
+    "django__django-12700",
+    "sympy__sympy-23117",
+    "sympy__sympy-12171",
+    "django__django-13265",
+    "psf__requests-2148",
+    "sympy__sympy-21614",
+    "sympy__sympy-17630",
+    "sphinx-doc__sphinx-8595",
+    "scikit-learn__scikit-learn-10508",
+    "django__django-12708",
+    "django__django-11133",
+    "sympy__sympy-23262",
+    "django__django-15851",
+    "django__django-14580",
+    "sympy__sympy-15308",
+    "django__django-12184",
+    "django__django-16820",
+    "sympy__sympy-13146",
+    "sympy__sympy-17139",
+    "django__django-13448",
+    "pydata__xarray-4493",
+    "sympy__sympy-12419",
+    "django__django-15790",
+    "django__django-11848",
+    "sympy__sympy-15678"
+  ],
+  "sample_seed": 20260908,
+  "model": "openai/qwen3.8-27b",
+  "arms": {
+    "baseline": {
+      "n": 25,
+      "resolved": 18,
+      "resolve_rate": 0.72,
+      "agent_exit": {
+        "Submitted": 24,
+        "ContextWindowExceededError": 1
+      },
+      "resolved_ids": [
+        "django__django-11133",
+        "django__django-11848",
+        "django__django-12184",
+        "django__django-12708",
+        "django__django-13448",
+        "django__django-14580",
+        "django__django-15790",
+        "django__django-15851",
+        "django__django-16820",
+        "sphinx-doc__sphinx-8595",
+        "sympy__sympy-12171",
+        "sympy__sympy-12419",
+        "sympy__sympy-15678",
+        "sympy__sympy-17139",
+        "sympy__sympy-17630",
+        "sympy__sympy-21614",
+        "sympy__sympy-23117",
+        "sympy__sympy-23262"
+      ],
+      "unresolved_ids": [
+        "django__django-12700",
+        "psf__requests-2148",
+        "pydata__xarray-4493",
+        "scikit-learn__scikit-learn-10508",
+        "sympy__sympy-13146",
+        "sympy__sympy-15308"
+      ],
+      "empty_patch": ["django__django-13265"],
+      "notes": "Official swebench 5.0.2 run_evaluation on SWE-bench/SWE-bench_Lite test. 18/25 resolved. Empty-patch django__django-13265 counted in the denominator. Not full Lite; not comparable to the synthetic 15-task 93.3%. full arm not run."
+    }
+  },
+  "wall_hours": 4.57,
+  "agent_wall_hours": 4.32,
+  "official_eval_wall_hours": 0.25,
+  "agent_started_at": "2026-09-09T01:24:57+08:00",
+  "agent_finished_at": "2026-09-09T05:43:59+08:00",
+  "official_eval_finished_at": "2026-09-09T09:36:02+08:00",
+  "harness": "mini-swe-agent 2.4.6 mini-extra swebench (agent) + swebench 5.0.2 run_evaluation (official resolve)",
+  "official_report": "evals/external/runs/lite25-baseline/openai__qwen3.8-27b.lite25-baseline.json",
+  "command": "uv run mini-extra swebench --model openai/qwen3.8-27b --subset lite --split test --filter <25 ids> --workers 1 -c swebench.yaml -c evals/external/local-model.yaml -c agent.cost_limit=999999 --output evals/external/runs/lite25-baseline"
+}

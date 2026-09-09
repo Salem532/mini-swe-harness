@@ -1,0 +1,10 @@
+id: mcp-discount-01
+category: mcp
+prompt: |
+  Implement pricing.compute_discount according to TICKET-1042. Visible tests only check that the function exists and returns a number.
+ticket_id: TICKET-1042
+fixture: evals/fixtures/mcp_discount_01
+visible_tests: evals/fixtures/mcp_discount_01/tests
+hidden_tests: evals/graders/mcp_discount_01
+timeout_s: 180
+max_steps: 30

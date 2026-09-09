@@ -1,0 +1,9 @@
+id: skill-empty-01
+category: skill
+prompt: |
+  Fix jsoncfg.load_config(text) so visible tests pass. It should parse a JSON object from a string.
+fixture: evals/fixtures/skill_empty_01
+visible_tests: evals/fixtures/skill_empty_01/tests
+hidden_tests: evals/graders/skill_empty_01
+timeout_s: 180
+max_steps: 30

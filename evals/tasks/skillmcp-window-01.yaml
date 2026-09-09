@@ -1,0 +1,10 @@
+id: skillmcp-window-01
+category: skill_mcp
+prompt: |
+  Implement window.contains according to TICKET-6602. Visible tests only check the function exists.
+ticket_id: TICKET-6602
+fixture: evals/fixtures/skillmcp_window_01
+visible_tests: evals/fixtures/skillmcp_window_01/tests
+hidden_tests: evals/graders/skillmcp_window_01
+timeout_s: 180
+max_steps: 30

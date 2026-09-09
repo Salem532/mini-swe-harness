@@ -1,0 +1,9 @@
+id: bash-slug-01
+category: bash
+prompt: |
+  Fix textutil.slugify so visible tests pass: lowercase, spaces to hyphens, strip punctuation, collapse repeats.
+fixture: evals/fixtures/bash_slug_01
+visible_tests: evals/fixtures/bash_slug_01/tests
+hidden_tests: evals/graders/bash_slug_01
+timeout_s: 180
+max_steps: 30

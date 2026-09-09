@@ -1,0 +1,9 @@
+# Eval policy: only the private ticket server. workspace_fs is omitted so
+# MCP-only / full arms cannot pretend filesystem MCP is the differentiator.
+allow_mcp_servers:
+  - ticket
+allow_mcp_tools:
+  ticket:
+    - get_ticket
+tool_timeout_s: 20
+max_output_chars: 8000

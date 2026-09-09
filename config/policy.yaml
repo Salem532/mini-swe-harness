@@ -1,0 +1,13 @@
+# Demo / interactive allowlist. Eval uses policy.eval.yaml.
+allow_mcp_servers:
+  - ticket
+  - workspace_fs
+allow_mcp_tools:
+  ticket:
+    - get_ticket
+    - list_tickets
+  workspace_fs:
+    - read_file
+    - list_directory
+tool_timeout_s: 30
+max_output_chars: 8000

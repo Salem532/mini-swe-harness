@@ -1,0 +1,7 @@
+{
+  "django__django-12700": {
+    "model_name_or_path": "openai/qwen3.8-27b",
+    "instance_id": "django__django-12700",
+    "model_patch": ""
+  }
+}

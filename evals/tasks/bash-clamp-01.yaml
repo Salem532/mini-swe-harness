@@ -1,0 +1,9 @@
+id: bash-clamp-01
+category: bash
+prompt: |
+  Fix numutil.clamp(value, lo, hi) so it returns value constrained to [lo, hi]. Visible tests cover the behavior.
+fixture: evals/fixtures/bash_clamp_01
+visible_tests: evals/fixtures/bash_clamp_01/tests
+hidden_tests: evals/graders/bash_clamp_01
+timeout_s: 180
+max_steps: 30

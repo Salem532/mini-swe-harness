@@ -1,0 +1,11 @@
+id: mcpopt-title-01
+category: mcp_opt
+prompt: |
+  Implement text.title_words. The full spec is in README.md in the workspace.
+  TICKET-7002 is an optional copy of the same rules (MCP is not required).
+ticket_id: TICKET-7002
+fixture: evals/fixtures/mcpopt_title_01
+visible_tests: evals/fixtures/mcpopt_title_01/tests
+hidden_tests: evals/graders/mcpopt_title_01
+timeout_s: 180
+max_steps: 30
