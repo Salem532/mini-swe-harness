@@ -55,8 +55,8 @@ The claim is **sidecar**: same 100-line bash loop, Skills loaded by `cat`, MCP o
 
 - Real GitHub issues do not use this repo’s ticket MCP. A 35 pp MCP lift on synthetic tasks **cannot** be restated as a SWE-bench score.
 - Verified/Lite full × even one arm is days of GPU and is a leaderboard run, which this project is not.
-- If an external subset is run, it is a **smoke that the loop finishes on someone else’s instances**, reported in `evals/external/`, never in the same sentence as 93.3%. This host ran a 25-id Lite baseline (`evals/external/summary.json`); Docker data-root is `/data8/docker` (changed by an admin, not this repo).
+- If an external subset is run, it is a **smoke that the loop finishes on someone else’s instances**, reported in `evals/external/`, never in the same sentence as 93.3%. This host ran a 25-id Lite baseline (`evals/external/summary.json`).
 
 ## Explicit non-goals
 
-SWE-bench full, native MCP tool injection, old SSE, MCP prompts/resources, multimedia, a complete bash allowlist, copying intern/Lumina artifacts, editing the resume from this repo, `--force` reruns of the published 180 synthetic episodes.
+SWE-bench full, native MCP tool injection, old SSE, MCP prompts/resources, multimedia, a complete bash allowlist, copying private third-party skills, `--force` reruns of the published 180 synthetic episodes.

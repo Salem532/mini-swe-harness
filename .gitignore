@@ -28,3 +28,10 @@ evals/external/**/*.log
 *.gguf
 *.safetensors
 weights/
+
+# Local-only notes (not for the public tree)
+HANDOFF.md
+HANDOFF-phase2.md
+HANDOFF-phase2-return.md
+mini-swe-harness-交接文档.md
+hello.sh
