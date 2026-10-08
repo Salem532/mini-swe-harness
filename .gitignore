@@ -21,7 +21,12 @@ evals/results/*.traj.json
 evals/results/*.log
 evals/results/eval-progress.json
 evals/results/resume-progress.json
+evals/results/*/raw/
+evals/results/*/*.log
+evals/results/*/eval-progress.json
 evals/external/**/*.log
+evals/external/**/minisweagent.log
+evals/external/skill-only.generated.yaml
 *.traj.json
 
 # Local secrets / models
@@ -35,3 +40,5 @@ HANDOFF-phase2.md
 HANDOFF-phase2-return.md
 mini-swe-harness-交接文档.md
 hello.sh
+docs/superpowers/
+肖杰升简历.pdf

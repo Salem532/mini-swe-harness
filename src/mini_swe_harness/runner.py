@@ -268,7 +268,7 @@ class EpisodeRunner:
                     workspace=workspace,
                     tickets=self.root / "evals" / "tickets",
                     mcp_config=config_dir(self.root) / "mcp.yaml",
-                    policy=config_dir(self.root) / "policy.eval.yaml",
+                    policy=task.policy or (config_dir(self.root) / "policy.eval.yaml"),
                     audit_dir=audit_dir,
                 )
             skills, _skipped = scan_skills(skills_dir(self.root)) if enable_skills else ([], [])

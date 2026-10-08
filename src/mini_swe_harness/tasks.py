@@ -7,7 +7,7 @@ import yaml
 
 from mini_swe_harness.paths import evals_dir, repo_root
 
-ALLOWED_CATEGORIES = {"skill", "mcp", "skill_mcp", "bash", "mcp_opt"}
+ALLOWED_CATEGORIES = {"skill", "mcp", "skill_mcp", "bash", "mcp_opt", "skill_lift", "mcp_policy"}
 
 
 @dataclass(frozen=True)
@@ -21,6 +21,8 @@ class TaskSpec:
     timeout_s: int = 180
     max_steps: int = 30
     ticket_id: str | None = None
+    expected_skill: str | None = None
+    policy: Path | None = None
 
     @property
     def src(self) -> Path:
@@ -48,7 +50,11 @@ def load_task(path: Path, *, root: Path | None = None) -> TaskSpec:
         timeout_s=int(data.get("timeout_s", 180)),
         max_steps=int(data.get("max_steps", 30)),
         ticket_id=data.get("ticket_id"),
+        expected_skill=(str(data["expected_skill"]) if data.get("expected_skill") else None),
+        policy=_as_path(root, str(data["policy"])) if data.get("policy") else None,
     )
+    if spec.policy is not None and not spec.policy.is_file():
+        raise FileNotFoundError(f"{path}: policy missing at {spec.policy}")
     if not spec.src.is_dir():
         raise FileNotFoundError(f"{path}: fixture src missing at {spec.src}")
     if not spec.visible_tests.is_dir():
@@ -58,8 +64,9 @@ def load_task(path: Path, *, root: Path | None = None) -> TaskSpec:
     return spec
 
 
-def load_all_tasks(root: Path | None = None) -> list[TaskSpec]:
-    base = evals_dir(root) / "tasks"
+def load_all_tasks(root: Path | None = None, *, tasks_dir: Path | None = None) -> list[TaskSpec]:
+    root = root or repo_root()
+    base = Path(tasks_dir) if tasks_dir is not None else (evals_dir(root) / "tasks")
     tasks = [load_task(path, root=root) for path in sorted(base.glob("*.yaml"))]
     ids = [task.id for task in tasks]
     if len(ids) != len(set(ids)):

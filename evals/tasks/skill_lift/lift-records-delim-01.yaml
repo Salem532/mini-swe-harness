@@ -1,0 +1,11 @@
+id: lift-records-delim-01
+category: skill_lift
+expected_skill: parse-records
+prompt: |
+  Fix ledger.split_row so visible tests pass. It splits one record into
+  fields.
+fixture: evals/fixtures/lift_records_delim_01
+visible_tests: evals/fixtures/lift_records_delim_01/tests
+hidden_tests: evals/graders/lift_records_delim_01
+timeout_s: 180
+max_steps: 30

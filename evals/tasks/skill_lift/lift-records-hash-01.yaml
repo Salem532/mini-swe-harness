@@ -1,0 +1,11 @@
+id: lift-records-hash-01
+category: skill_lift
+expected_skill: parse-records
+prompt: |
+  Fix ledger.read_lines so visible tests pass. It splits a payload into
+  non-empty lines.
+fixture: evals/fixtures/lift_records_hash_01
+visible_tests: evals/fixtures/lift_records_hash_01/tests
+hidden_tests: evals/graders/lift_records_hash_01
+timeout_s: 180
+max_steps: 30

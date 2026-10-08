@@ -45,6 +45,14 @@ Wall-clock: `WallBoundModel` sets each LiteLLM HTTP `timeout` to remaining episo
 
 Main metric: hidden judge pass rate, with Wilson CI and paired deltas vs baseline on `(task, seed)` pairs.
 
+Synthetic 180 `summary.json` also reports `timeouts` / `timeout_rate` from `exit_status` in `{TimeExceeded, Timeout}`. Episode raw files stay frozen; regenerate with `summarize`.
+
+**skill_lift** is a second catalog (`evals/tasks/skill_lift/`); the published 180 episodes stay frozen. GPU eval: `eval --tasks-dir evals/tasks/skill_lift --output evals/results/skill_lift`.
+
+**mcp_policy** is a third catalog (`evals/tasks/mcp_policy/`) with `config/policy.mcp_policy.yaml` (`get_ticket` + `list_tickets`). `TaskSpec.policy` selects it; frozen 180 keeps `policy.eval.yaml`. GPU: `eval --tasks-dir evals/tasks/mcp_policy --output evals/results/mcp_policy`.
+
+External Lite-25 is baseline + **skill_only** on the frozen 25 ids (`evals/external/`). MCP stays off; Skills are `pytest-debug` and `repo-qa` bind-mounted at `/opt/agent-skills`.
+
 Local model: LiteLLM → `OPENAI_API_BASE` (vLLM). `MSWEA_COST_TRACKING=ignore_errors` because local ids are not in the LiteLLM registry. Token counts come from trajectory `response.usage` when present.
 
 ## Why not swap in SWE-agent

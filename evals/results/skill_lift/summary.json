@@ -1,0 +1,231 @@
+{
+  "model": "openai/qwen3.8-27b",
+  "n_tasks": 6,
+  "n_repeats": 3,
+  "n_runs": 72,
+  "primary_metric": "hidden_judge_pass_rate",
+  "arms": {
+    "baseline": {
+      "n": 18,
+      "success": 7,
+      "success_rate": 0.3889,
+      "success_rate_ci95": [
+        0.203,
+        0.6138
+      ],
+      "avg_steps_all": 23.6667,
+      "avg_steps_success": 17.0,
+      "avg_tokens_all": 106931.5556,
+      "avg_tokens_success": 66263.4286,
+      "avg_api_calls_all": 14.7778,
+      "skill_activation_rate": 0.2222,
+      "mcp_calls": {
+        "ok": 0,
+        "denied": 0,
+        "error": 0
+      }
+    },
+    "full": {
+      "n": 18,
+      "success": 17,
+      "success_rate": 0.9444,
+      "success_rate_ci95": [
+        0.7424,
+        0.9901
+      ],
+      "avg_steps_all": 13.8889,
+      "avg_steps_success": 14.0,
+      "avg_tokens_all": 51579.1111,
+      "avg_tokens_success": 51708.8235,
+      "avg_api_calls_all": 9.1111,
+      "skill_activation_rate": 1.0,
+      "mcp_calls": {
+        "ok": 0,
+        "denied": 0,
+        "error": 0
+      }
+    },
+    "mcp_only": {
+      "n": 18,
+      "success": 7,
+      "success_rate": 0.3889,
+      "success_rate_ci95": [
+        0.203,
+        0.6138
+      ],
+      "avg_steps_all": 23.7222,
+      "avg_steps_success": 18.4286,
+      "avg_tokens_all": 98274.5,
+      "avg_tokens_success": 70165.2857,
+      "avg_api_calls_all": 14.7222,
+      "skill_activation_rate": 0.1667,
+      "mcp_calls": {
+        "ok": 1,
+        "denied": 0,
+        "error": 39
+      }
+    },
+    "skill_only": {
+      "n": 18,
+      "success": 16,
+      "success_rate": 0.8889,
+      "success_rate_ci95": [
+        0.672,
+        0.969
+      ],
+      "avg_steps_all": 14.3889,
+      "avg_steps_success": 14.1875,
+      "avg_tokens_all": 54519.2778,
+      "avg_tokens_success": 52058.1875,
+      "avg_api_calls_all": 9.7778,
+      "skill_activation_rate": 1.0,
+      "mcp_calls": {
+        "ok": 0,
+        "denied": 0,
+        "error": 0
+      }
+    }
+  },
+  "paired_gains": {
+    "full_vs_baseline": {
+      "n_pairs": 18,
+      "pass_rate_delta": 0.5556
+    },
+    "mcp_only_vs_baseline": {
+      "n_pairs": 18,
+      "pass_rate_delta": 0.0
+    },
+    "skill_only_vs_baseline": {
+      "n_pairs": 18,
+      "pass_rate_delta": 0.5
+    }
+  },
+  "skill_activation_rate": 1.0,
+  "mcp_calls": {
+    "ok": 0,
+    "denied": 0,
+    "error": 0
+  },
+  "by_category": {
+    "skill_lift": {
+      "baseline": {
+        "n": 18,
+        "success": 7,
+        "success_rate": 0.3889,
+        "success_rate_ci95": [
+          0.203,
+          0.6138
+        ],
+        "avg_steps_all": 23.6667,
+        "avg_steps_success": 17.0,
+        "avg_tokens_all": 106931.5556,
+        "avg_tokens_success": 66263.4286,
+        "avg_api_calls_all": 14.7778,
+        "skill_activation_rate": 0.2222,
+        "mcp_calls": {
+          "ok": 0,
+          "denied": 0,
+          "error": 0
+        }
+      },
+      "full": {
+        "n": 18,
+        "success": 17,
+        "success_rate": 0.9444,
+        "success_rate_ci95": [
+          0.7424,
+          0.9901
+        ],
+        "avg_steps_all": 13.8889,
+        "avg_steps_success": 14.0,
+        "avg_tokens_all": 51579.1111,
+        "avg_tokens_success": 51708.8235,
+        "avg_api_calls_all": 9.1111,
+        "skill_activation_rate": 1.0,
+        "mcp_calls": {
+          "ok": 0,
+          "denied": 0,
+          "error": 0
+        }
+      },
+      "mcp_only": {
+        "n": 18,
+        "success": 7,
+        "success_rate": 0.3889,
+        "success_rate_ci95": [
+          0.203,
+          0.6138
+        ],
+        "avg_steps_all": 23.7222,
+        "avg_steps_success": 18.4286,
+        "avg_tokens_all": 98274.5,
+        "avg_tokens_success": 70165.2857,
+        "avg_api_calls_all": 14.7222,
+        "skill_activation_rate": 0.1667,
+        "mcp_calls": {
+          "ok": 1,
+          "denied": 0,
+          "error": 39
+        }
+      },
+      "skill_only": {
+        "n": 18,
+        "success": 16,
+        "success_rate": 0.8889,
+        "success_rate_ci95": [
+          0.672,
+          0.969
+        ],
+        "avg_steps_all": 14.3889,
+        "avg_steps_success": 14.1875,
+        "avg_tokens_all": 54519.2778,
+        "avg_tokens_success": 52058.1875,
+        "avg_api_calls_all": 9.7778,
+        "skill_activation_rate": 1.0,
+        "mcp_calls": {
+          "ok": 0,
+          "denied": 0,
+          "error": 0
+        }
+      },
+      "paired_gains": {
+        "full_vs_baseline": {
+          "n_pairs": 18,
+          "pass_rate_delta": 0.5556
+        },
+        "mcp_only_vs_baseline": {
+          "n_pairs": 18,
+          "pass_rate_delta": 0.0
+        },
+        "skill_only_vs_baseline": {
+          "n_pairs": 18,
+          "pass_rate_delta": 0.5
+        }
+      }
+    }
+  },
+  "skill_lift": {
+    "n_pairs": 18,
+    "pass_lift_skill_only_vs_baseline": 0.5,
+    "trigger_rate_by_arm": {
+      "baseline": 0.0,
+      "full": 1.0,
+      "mcp_only": 0.0,
+      "skill_only": 1.0
+    },
+    "compliance_rate_by_arm": {
+      "baseline": 0.0,
+      "full": 0.9444,
+      "mcp_only": 0.0,
+      "skill_only": 0.8889
+    }
+  },
+  "harness_version": "0.1.0",
+  "image": "mini-swe-harness:local",
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "taskset_sha256": "e9dbe23d6434f907e1fa874527558c1c2776ffc0aa7c73f2474b12889b941670"
+}

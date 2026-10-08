@@ -1,0 +1,10 @@
+# Catalog-local eval policy: two ticket tools. workspace_fs stays denied.
+# Do not use this file for the frozen 180 (that is policy.eval.yaml).
+allow_mcp_servers:
+  - ticket
+allow_mcp_tools:
+  ticket:
+    - get_ticket
+    - list_tickets
+tool_timeout_s: 20
+max_output_chars: 8000

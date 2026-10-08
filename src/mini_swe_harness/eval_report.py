@@ -9,6 +9,8 @@ from typing import Any
 
 from mini_swe_harness.runner import RunResult
 
+PROCESS_TIMEOUT_EXITS = frozenset({"TimeExceeded", "Timeout"})
+
 
 def _mean(values: list[float]) -> float:
     return round(statistics.fmean(values), 4) if values else 0.0
@@ -35,6 +37,7 @@ def _arm_stats(rows: list[RunResult]) -> dict[str, Any]:
         return _mean(values)
 
     skill_on = sum(1 for row in rows if row.skill.get("activated"))
+    timeouts = sum(1 for row in rows if row.exit_status in PROCESS_TIMEOUT_EXITS)
     return {
         "n": n,
         "success": successes,
@@ -46,6 +49,8 @@ def _arm_stats(rows: list[RunResult]) -> dict[str, Any]:
         "avg_tokens_success": avg(lambda r: r.usage.get("total_tokens") or 0, successful),
         "avg_api_calls_all": avg(lambda r: r.usage.get("api_calls") or 0, rows),
         "skill_activation_rate": round(skill_on / n, 4) if n else 0.0,
+        "timeouts": timeouts,
+        "timeout_rate": round(timeouts / n, 4) if n else 0.0,
         "mcp_calls": {
             "ok": sum(row.mcp.get("ok", 0) for row in rows),
             "denied": sum(row.mcp.get("denied", 0) for row in rows),
@@ -83,12 +88,42 @@ def _by_category(rows: list[RunResult], task_categories: dict[str, str]) -> dict
     return out
 
 
+def _skill_lift_stats(rows: list[RunResult], expected: dict[str, str]) -> dict[str, Any]:
+    from mini_swe_harness.metrics import skill_triggered
+
+    by_arm: dict[str, list[RunResult]] = defaultdict(list)
+    for row in rows:
+        by_arm[row.arm].append(row)
+    trigger_rate = {}
+    compliance_rate = {}
+    for arm, items in by_arm.items():
+        n = len(items)
+        trig = sum(1 for r in items if skill_triggered(r.skill, expected.get(r.task_id)))
+        comp = sum(
+            1
+            for r in items
+            if r.success and skill_triggered(r.skill, expected.get(r.task_id))
+        )
+        trigger_rate[arm] = round(trig / n, 4) if n else 0.0
+        compliance_rate[arm] = round(comp / n, 4) if n else 0.0
+    baseline = by_arm.get("baseline", [])
+    skill_only = by_arm.get("skill_only", [])
+    lift = paired_gain(baseline, skill_only)
+    return {
+        "n_pairs": lift.get("n_pairs", 0),
+        "pass_lift_skill_only_vs_baseline": lift.get("pass_rate_delta", 0.0),
+        "trigger_rate_by_arm": trigger_rate,
+        "compliance_rate_by_arm": compliance_rate,
+    }
+
+
 def build_summary(
     rows: list[RunResult],
     *,
     model: str,
     extra: dict[str, Any] | None = None,
     task_categories: dict[str, str] | None = None,
+    task_expected_skills: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     by_arm: dict[str, list[RunResult]] = defaultdict(list)
     for row in rows:
@@ -113,6 +148,8 @@ def build_summary(
     }
     if task_categories:
         summary["by_category"] = _by_category(rows, task_categories)
+    if task_expected_skills:
+        summary["skill_lift"] = _skill_lift_stats(rows, task_expected_skills)
     if extra:
         summary.update(extra)
     return summary

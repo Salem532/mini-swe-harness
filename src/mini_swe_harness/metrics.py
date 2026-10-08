@@ -57,6 +57,13 @@ def skill_activation(trajectory: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def skill_triggered(skill: dict[str, Any], expected_skill: str | None) -> bool:
+    if not expected_skill:
+        return False
+    activated = skill.get("activated_skills") or []
+    return expected_skill in activated
+
+
 def mcp_cli_mentions(trajectory: dict[str, Any]) -> int:
     return sum(1 for command in iter_commands(trajectory) if MCP_CALL_RE.search(command))
 

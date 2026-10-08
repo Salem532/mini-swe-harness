@@ -17,9 +17,57 @@ Primary metric: **hidden-judge pass rate**. 15 tasks × 4 arms × 3 seeds = **18
 | mcp_only | off | on | 41/45 | 91.1% | +33.3 pp |
 | full | on | on | 42/45 | 93.3% | +35.6 pp |
 
+Process (same 180 episodes; timeouts = `TimeExceeded` ∪ `Timeout`, independent of the hidden judge):
+
+| Arm | Pass | avg steps | avg tokens | timeouts |
+|---|---|---|---|---|
+| baseline | 26/45 | 20.6 | 84k | 17 |
+| skill_only | 28/45 | 22.8 | 108k | 19 |
+| mcp_only | 41/45 | 14.5 | 53k | 4 |
+| full | 42/45 | 14.2 | 55k | 8 |
+
+skill_only is more expensive; gateway arms are shorter and time out less. Do not treat this table as a second pass ranking.
+
 By category (n=9 each): **bash** and **mcp_opt** are 9/9 on every arm; **skill** is where Skills help (6/9 → 9/9); **mcp-required** is 0 without the gateway (spec lives only in the ticket). The 12-task slice without `mcp_opt` is the right cut for “MCP required” attribution (47.2% → 88.9% mcp_only). Breakdown: [`docs/eval-breakdown.md`](docs/eval-breakdown.md).
 
 `mcp_opt` is a **control**: the same spec is in workspace `README.md` *and* the ticket. All four arms score 9/9; baseline never needs MCP. That is why MCP-required tasks are allowed to hide the spec.
+
+## Skill Lift slice (6 tasks)
+
+Separate catalog (`evals/tasks/skill_lift/`). Happy path is in the workspace;
+edge rules live only in three Skills (`parse-money`, `parse-records`,
+`schedule-window`). Primary comparison: **skill_only vs baseline** (paired Lift),
+plus Trigger / Compliance. 6 tasks × 4 arms × 3 seeds = **72** episodes. **Do not
+average with 93.3%.**
+
+| Arm | Skills | MCP gateway | Pass | Rate | vs baseline |
+|---|---|---|---|---|---|
+| baseline | off | off | 7/18 | 38.9% | — |
+| skill_only | on | off | 16/18 | 88.9% | +50.0 pp |
+| mcp_only | off | on | 7/18 | 38.9% | +0.0 pp |
+| full | on | on | 17/18 | 94.4% | +55.6 pp |
+
+Trigger (expected `SKILL.md` in the trajectory): skill_only 18/18, baseline 0/18.
+Compliance (pass AND trigger): skill_only 88.9%, full 94.4%. mcp_only matches
+baseline — these tasks have no ticket. Details: `evals/results/skill_lift/summary.json`.
+
+## MCP policy slice (2 tasks)
+
+Separate catalog (`evals/tasks/mcp_policy/`) and policy file
+(`config/policy.mcp_policy.yaml`: `get_ticket` + `list_tickets`; `workspace_fs`
+denied). Frozen 180 still uses `policy.eval.yaml`. **policy-list-01** splits the
+spec across two tickets (must list, then read both). **policy-deny-01** baits
+`workspace_fs.read_file`; the agent must recover via tickets. 2 × 4 × 3 = 24
+episodes. **Do not average with 93.3%.**
+
+| Arm | Pass | list | deny | vs baseline |
+|---|---|---|---|---|
+| baseline | 0/6 | 0/3 | 0/3 | — |
+| skill_only | 0/6 | 0/3 | 0/3 | +0 |
+| mcp_only | 5/6 | 3/3 | 2/3 | +5 |
+| full | 5/6 | 3/3 | 2/3 | +5 |
+
+No gateway → 0. Multi-tool list+read is 3/3 with the gateway. Deny-bait still needs the ticket (2/3); audit `denied` stayed 0 (gateway arms used tickets, did not have to hit `workspace_fs`). Details: `evals/results/mcp_policy/summary.json`.
 
 ## What it adds (sidecar only)
 
@@ -49,7 +97,8 @@ After the agent exits, a **judge** container runs hidden tests from `evals/grade
 
 - `.agents/skills/` — `pytest-debug`, `repo-qa`, `mcp-ticket-context`
 - `src/mini_swe_harness/` — catalog, policy, MCP bridge, gateway, runner, report
-- `config/policy.eval.yaml` — eval allowlist: `ticket.get_ticket` only
+- `config/policy.eval.yaml` — frozen-180 allowlist: `ticket.get_ticket` only
+- `config/policy.mcp_policy.yaml` — MCP-policy catalog: `get_ticket` + `list_tickets`
 - `evals/tasks/` — 15 yaml specs
 - `evals/graders/` — hidden tests (never mounted into the agent)
 - `evals/tickets/` — private ticket bodies (gateway only)
@@ -88,7 +137,7 @@ sg docker -c 'uv run mini-swe-harness run --task evals/tasks/bash-fizz-01.yaml -
 sg docker -c 'uv run mini-swe-harness eval --arm all --seeds 1,2,3'
 ```
 
-External (non-synthetic) subsets belong under `evals/external/` and **must not** be averaged with 93.3%. A 25-id SWE-bench Lite sample (baseline only) is in `evals/external/summary.json`.
+External (non-synthetic) subsets belong under `evals/external/` and **must not** be averaged with the synthetic catalog. A 25-id SWE-bench Lite sample is in `evals/external/summary.json`: baseline **18/25**, skill_only **20/25** (`pytest-debug` + `repo-qa` only; +2, no regressions). Failure labels: `evals/external/failure-taxonomy.md`.
 
 ## What this repo will not do
 

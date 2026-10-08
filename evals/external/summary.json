@@ -67,8 +67,52 @@
         "sympy__sympy-13146",
         "sympy__sympy-15308"
       ],
-      "empty_patch": ["django__django-13265"],
+      "empty_patch": [
+        "django__django-13265"
+      ],
       "notes": "Official swebench 5.0.2 run_evaluation on SWE-bench/SWE-bench_Lite test. 18/25 resolved. Empty-patch django__django-13265 counted in the denominator. Not full Lite; not comparable to the synthetic 15-task 93.3%. full arm not run."
+    },
+    "skill_only": {
+      "n": 25,
+      "resolved": 20,
+      "resolve_rate": 0.8,
+      "agent_exit": {
+        "Submitted": 25
+      },
+      "resolved_ids": [
+        "django__django-11133",
+        "django__django-11848",
+        "django__django-12184",
+        "django__django-12708",
+        "django__django-13265",
+        "django__django-13448",
+        "django__django-14580",
+        "django__django-15790",
+        "django__django-15851",
+        "django__django-16820",
+        "scikit-learn__scikit-learn-10508",
+        "sphinx-doc__sphinx-8595",
+        "sympy__sympy-12171",
+        "sympy__sympy-12419",
+        "sympy__sympy-15678",
+        "sympy__sympy-17139",
+        "sympy__sympy-17630",
+        "sympy__sympy-21614",
+        "sympy__sympy-23117",
+        "sympy__sympy-23262"
+      ],
+      "unresolved_ids": [
+        "django__django-12700",
+        "psf__requests-2148",
+        "pydata__xarray-4493",
+        "sympy__sympy-13146",
+        "sympy__sympy-15308"
+      ],
+      "empty_patch": [],
+      "agent_wall_hours": 4.54,
+      "official_eval_wall_hours": 0.27,
+      "official_report": "evals/external/runs/lite25-skill-only/openai__qwen3.8-27b.lite25-skill-only.json",
+      "notes": "Official swebench 5.0.2 run_evaluation on SWE-bench/SWE-bench_Lite test. 20/25 resolved. Skills: pytest-debug + repo-qa only (no ticket MCP, no Skill Lift skills). Empty-patch none. Infra failures: 0. Not full Lite; not comparable to the synthetic 15-task 93.3%."
     }
   },
   "wall_hours": 4.57,
@@ -79,5 +123,298 @@
   "official_eval_finished_at": "2026-09-09T09:36:02+08:00",
   "harness": "mini-swe-agent 2.4.6 mini-extra swebench (agent) + swebench 5.0.2 run_evaluation (official resolve)",
   "official_report": "evals/external/runs/lite25-baseline/openai__qwen3.8-27b.lite25-baseline.json",
-  "command": "uv run mini-extra swebench --model openai/qwen3.8-27b --subset lite --split test --filter <25 ids> --workers 1 -c swebench.yaml -c evals/external/local-model.yaml -c agent.cost_limit=999999 --output evals/external/runs/lite25-baseline"
+  "command": "uv run mini-extra swebench --model openai/qwen3.8-27b --subset lite --split test --filter <25 ids> --workers 1 -c swebench.yaml -c evals/external/local-model.yaml -c agent.cost_limit=999999 --output evals/external/runs/lite25-baseline",
+  "failure_taxonomy": {
+    "baseline": {
+      "django__django-12700": {
+        "primary": "tests_failed",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-23117": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-12171": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-13265": {
+        "primary": "context_window",
+        "empty_patch": true,
+        "agent_exit": "ContextWindowExceededError"
+      },
+      "psf__requests-2148": {
+        "primary": "tests_failed",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-21614": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-17630": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sphinx-doc__sphinx-8595": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "scikit-learn__scikit-learn-10508": {
+        "primary": "tests_failed",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-12708": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-11133": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-23262": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-15851": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-14580": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-15308": {
+        "primary": "tests_failed",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-12184": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-16820": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-13146": {
+        "primary": "tests_failed",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-17139": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-13448": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "pydata__xarray-4493": {
+        "primary": "tests_failed",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-12419": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-15790": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-11848": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-15678": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      }
+    },
+    "skill_only": {
+      "django__django-12700": {
+        "primary": "tests_failed",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-23117": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-12171": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-13265": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "psf__requests-2148": {
+        "primary": "tests_failed",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-21614": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-17630": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sphinx-doc__sphinx-8595": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "scikit-learn__scikit-learn-10508": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-12708": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-11133": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-23262": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-15851": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-14580": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-15308": {
+        "primary": "tests_failed",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-12184": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-16820": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-13146": {
+        "primary": "tests_failed",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-17139": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-13448": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "pydata__xarray-4493": {
+        "primary": "tests_failed",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-12419": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-15790": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "django__django-11848": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      },
+      "sympy__sympy-15678": {
+        "primary": "resolved",
+        "empty_patch": false,
+        "agent_exit": "Submitted"
+      }
+    }
+  },
+  "paired": {
+    "skill_only_vs_baseline": {
+      "resolved_delta": 2,
+      "both_resolved": [
+        "django__django-11133",
+        "django__django-11848",
+        "django__django-12184",
+        "django__django-12708",
+        "django__django-13448",
+        "django__django-14580",
+        "django__django-15790",
+        "django__django-15851",
+        "django__django-16820",
+        "sphinx-doc__sphinx-8595",
+        "sympy__sympy-12171",
+        "sympy__sympy-12419",
+        "sympy__sympy-15678",
+        "sympy__sympy-17139",
+        "sympy__sympy-17630",
+        "sympy__sympy-21614",
+        "sympy__sympy-23117",
+        "sympy__sympy-23262"
+      ],
+      "skill_fixed": [
+        "django__django-13265",
+        "scikit-learn__scikit-learn-10508"
+      ],
+      "skill_regressed": [],
+      "both_failed": [
+        "django__django-12700",
+        "psf__requests-2148",
+        "pydata__xarray-4493",
+        "sympy__sympy-13146",
+        "sympy__sympy-15308"
+      ]
+    }
+  }
 }

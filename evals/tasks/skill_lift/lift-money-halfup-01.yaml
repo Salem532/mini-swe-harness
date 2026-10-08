@@ -1,0 +1,11 @@
+id: lift-money-halfup-01
+category: skill_lift
+expected_skill: parse-money
+prompt: |
+  Fix prices.parse_price so visible tests pass. It converts a decimal price
+  string to integer cents.
+fixture: evals/fixtures/lift_money_halfup_01
+visible_tests: evals/fixtures/lift_money_halfup_01/tests
+hidden_tests: evals/graders/lift_money_halfup_01
+timeout_s: 180
+max_steps: 30

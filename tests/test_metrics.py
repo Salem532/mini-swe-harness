@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from mini_swe_harness.metrics import extract_usage, skill_activation, summarize_audit
+from mini_swe_harness.metrics import extract_usage, skill_activation, skill_triggered, summarize_audit
 
 
 def test_extract_usage_and_skill_cat() -> None:
@@ -42,3 +42,11 @@ def test_audit_counts() -> None:
         ]
     )
     assert summary == {"ok": 2, "denied": 1, "error": 1, "total": 4}
+
+
+def test_skill_triggered() -> None:
+    payload = {"activated_skills": ["parse-money", "repo-qa"]}
+    assert skill_triggered(payload, "parse-money") is True
+    assert skill_triggered(payload, "parse-records") is False
+    assert skill_triggered(payload, None) is False
+    assert skill_triggered({}, "parse-money") is False

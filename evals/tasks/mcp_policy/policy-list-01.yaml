@@ -1,0 +1,14 @@
+id: policy-list-01
+category: mcp_policy
+policy: config/policy.mcp_policy.yaml
+prompt: |
+  Implement shipping.surcharge(weight_kg, zone) so it returns integer cents.
+  Visible tests only check that the function exists and returns an int.
+  The full shipping rules live on the ticket MCP. There is more than one
+  work order; list them and read every ticket before coding. Do not guess
+  rates. Ticket ids are not in this prompt.
+fixture: evals/fixtures/policy_list_01
+visible_tests: evals/fixtures/policy_list_01/tests
+hidden_tests: evals/graders/policy_list_01
+timeout_s: 180
+max_steps: 30

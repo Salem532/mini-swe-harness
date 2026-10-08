@@ -30,7 +30,7 @@ def _load_env() -> None:
 def cmd_eval(args: argparse.Namespace) -> int:
     _load_env()
     root = repo_root()
-    tasks = load_all_tasks(root)
+    tasks = load_all_tasks(root, tasks_dir=Path(args.tasks_dir) if args.tasks_dir else None)
     if args.task:
         tasks = [task for task in tasks if task.id in set(args.task)]
         if not tasks:
@@ -77,7 +77,12 @@ def cmd_eval(args: argparse.Namespace) -> int:
             + "\n",
             encoding="utf-8",
         )
-    summary = _emit_summary(root, out_dir, image=args.image)
+    summary = _emit_summary(
+        root,
+        out_dir,
+        image=args.image,
+        tasks_dir=Path(args.tasks_dir) if args.tasks_dir else None,
+    )
     print(json.dumps(summary.get("arms"), indent=2))
     return 0
 
@@ -89,14 +94,23 @@ def _taskset_hash(root: Path) -> str:
     return file_sha256(hashed)
 
 
-def _emit_summary(root: Path, out_dir: Path, *, image: str) -> dict:
+def _emit_summary(
+    root: Path,
+    out_dir: Path,
+    *,
+    image: str,
+    tasks_dir: Path | None = None,
+) -> dict:
     raw_dir = out_dir / "raw"
     rows = load_all_results(raw_dir)
-    categories = {task.id: task.category for task in load_all_tasks(root)}
+    tasks = load_all_tasks(root, tasks_dir=tasks_dir)
+    categories = {task.id: task.category for task in tasks}
+    expected_skills = {t.id: t.expected_skill for t in tasks if t.expected_skill}
     summary = build_summary(
         rows,
         model=os.environ.get("LITELLM_MODEL", "unknown"),
         task_categories=categories,
+        task_expected_skills=expected_skills or None,
         extra={
             "harness_version": __version__,
             "image": image,
@@ -120,7 +134,12 @@ def cmd_run(args: argparse.Namespace) -> int:
 
 def cmd_summarize(args: argparse.Namespace) -> int:
     _load_env()
-    summary = _emit_summary(repo_root(), Path(args.output), image=args.image)
+    summary = _emit_summary(
+        repo_root(),
+        Path(args.output),
+        image=args.image,
+        tasks_dir=Path(args.tasks_dir) if args.tasks_dir else None,
+    )
     print(json.dumps({"n_runs": summary.get("n_runs"), "arms": summary.get("arms"), "by_category": summary.get("by_category")}, indent=2))
     return 0
 
@@ -140,6 +159,7 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Re-run episodes even if raw/*.result.json already exists",
     )
+    eval_p.add_argument("--tasks-dir", default=None)
     eval_p.set_defaults(func=cmd_eval)
 
     run_p = sub.add_parser("run", help="Run a single task yaml")
@@ -153,6 +173,7 @@ def build_parser() -> argparse.ArgumentParser:
     sum_p = sub.add_parser("summarize", help="Rebuild summary.json from raw/*.result.json")
     sum_p.add_argument("--image", default=os.environ.get("MINI_SWE_HARNESS_IMAGE", "mini-swe-harness:local"))
     sum_p.add_argument("--output", default=str(evals_dir() / "results"))
+    sum_p.add_argument("--tasks-dir", default=None)
     sum_p.set_defaults(func=cmd_summarize)
 
     return parser

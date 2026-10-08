@@ -3,5 +3,5 @@
 __version__ = "0.1.0"
 
 EVAL_ARMS = ("baseline", "skill_only", "mcp_only", "full")
-TASK_CATEGORIES = ("skill", "mcp", "skill_mcp", "bash", "mcp_opt")
+TASK_CATEGORIES = ("skill", "mcp", "skill_mcp", "bash", "mcp_opt", "skill_lift", "mcp_policy")
 DEFAULT_SEEDS = (1, 2, 3)

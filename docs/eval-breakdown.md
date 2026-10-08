@@ -21,6 +21,20 @@
 
 12 题合计里 skill_only「几乎没动」是加权假象：bash 已经封顶，mcp 题没有网关等于没有规格，真正有 Skills 增益的只有 `skill` 类。
 
+## 按类别超时
+
+每格 n=9。超时 = `exit_status` 为 `TimeExceeded` 或 `Timeout`，**与 hidden judge 无关**。
+
+| 类别 | baseline | skill_only | mcp_only | full |
+|---|---|---|---|---|
+| bash | 0 | 0 | 0 | 0 |
+| skill | 2 | 0 | 2 | 0 |
+| mcp | 7 | 9 | 1 | 1 |
+| skill_mcp | 7 | 9 | 1 | 6 |
+| mcp_opt | 1 | 1 | 0 | 1 |
+
+超时堆在没钥匙的 mcp / skill_mcp（skill_only 两格都是 9/9）。full 在 skill_mcp 上 6/9 超时：Skills 不是免费的（同一类 full 通过率 6/9，mcp_only 9/9）。mcp_opt 可以超时仍过 judge，所以超时列不是 pass 的影子。
+
 ## mcp_opt：MCP 不是刚需
 
 三题规格同时在 workspace `README.md` 和 TICKET-7001/7002/7003。2026-09-08 跑完 36 条，**四臂都是 9/9**。

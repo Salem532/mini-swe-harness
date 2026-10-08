@@ -19,6 +19,8 @@
       "avg_tokens_success": 50254.8846,
       "avg_api_calls_all": 12.5111,
       "skill_activation_rate": 0.2889,
+      "timeouts": 17,
+      "timeout_rate": 0.3778,
       "mcp_calls": {
         "ok": 0,
         "denied": 0,
@@ -39,6 +41,8 @@
       "avg_tokens_success": 59000.1905,
       "avg_api_calls_all": 9.5778,
       "skill_activation_rate": 0.7556,
+      "timeouts": 8,
+      "timeout_rate": 0.1778,
       "mcp_calls": {
         "ok": 17,
         "denied": 0,
@@ -59,6 +63,8 @@
       "avg_tokens_success": 52179.4634,
       "avg_api_calls_all": 9.8667,
       "skill_activation_rate": 0.0,
+      "timeouts": 4,
+      "timeout_rate": 0.0889,
       "mcp_calls": {
         "ok": 24,
         "denied": 0,
@@ -79,6 +85,8 @@
       "avg_tokens_success": 65008.7857,
       "avg_api_calls_all": 14.1111,
       "skill_activation_rate": 0.8222,
+      "timeouts": 19,
+      "timeout_rate": 0.4222,
       "mcp_calls": {
         "ok": 0,
         "denied": 0,
@@ -122,6 +130,8 @@
         "avg_tokens_success": 28740.7778,
         "avg_api_calls_all": 8.4444,
         "skill_activation_rate": 0.0,
+        "timeouts": 0,
+        "timeout_rate": 0.0,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -142,6 +152,8 @@
         "avg_tokens_success": 42080.6667,
         "avg_api_calls_all": 9.3333,
         "skill_activation_rate": 0.3333,
+        "timeouts": 0,
+        "timeout_rate": 0.0,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -162,6 +174,8 @@
         "avg_tokens_success": 32088.6667,
         "avg_api_calls_all": 8.2222,
         "skill_activation_rate": 0.0,
+        "timeouts": 0,
+        "timeout_rate": 0.0,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -182,6 +196,8 @@
         "avg_tokens_success": 44512.5556,
         "avg_api_calls_all": 9.3333,
         "skill_activation_rate": 0.4444,
+        "timeouts": 0,
+        "timeout_rate": 0.0,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -218,6 +234,8 @@
         "avg_tokens_success": 0.0,
         "avg_api_calls_all": 16.4444,
         "skill_activation_rate": 0.6667,
+        "timeouts": 7,
+        "timeout_rate": 0.7778,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -238,6 +256,8 @@
         "avg_tokens_success": 52041.5556,
         "avg_api_calls_all": 9.0,
         "skill_activation_rate": 1.0,
+        "timeouts": 1,
+        "timeout_rate": 0.1111,
         "mcp_calls": {
           "ok": 9,
           "denied": 0,
@@ -258,6 +278,8 @@
         "avg_tokens_success": 32716.875,
         "avg_api_calls_all": 7.3333,
         "skill_activation_rate": 0.0,
+        "timeouts": 1,
+        "timeout_rate": 0.1111,
         "mcp_calls": {
           "ok": 8,
           "denied": 0,
@@ -278,6 +300,8 @@
         "avg_tokens_success": 0.0,
         "avg_api_calls_all": 20.1111,
         "skill_activation_rate": 1.0,
+        "timeouts": 9,
+        "timeout_rate": 1.0,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -314,6 +338,8 @@
         "avg_tokens_success": 60523.8889,
         "avg_api_calls_all": 11.0,
         "skill_activation_rate": 0.1111,
+        "timeouts": 1,
+        "timeout_rate": 0.1111,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -334,6 +360,8 @@
         "avg_tokens_success": 77932.8889,
         "avg_api_calls_all": 12.2222,
         "skill_activation_rate": 1.0,
+        "timeouts": 1,
+        "timeout_rate": 0.1111,
         "mcp_calls": {
           "ok": 2,
           "denied": 0,
@@ -354,6 +382,8 @@
         "avg_tokens_success": 60365.5556,
         "avg_api_calls_all": 11.4444,
         "skill_activation_rate": 0.0,
+        "timeouts": 0,
+        "timeout_rate": 0.0,
         "mcp_calls": {
           "ok": 7,
           "denied": 0,
@@ -374,6 +404,8 @@
         "avg_tokens_success": 69966.3333,
         "avg_api_calls_all": 11.6667,
         "skill_activation_rate": 1.0,
+        "timeouts": 1,
+        "timeout_rate": 0.1111,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -410,6 +442,8 @@
         "avg_tokens_success": 63615.6667,
         "avg_api_calls_all": 12.6667,
         "skill_activation_rate": 0.0,
+        "timeouts": 2,
+        "timeout_rate": 0.2222,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -430,6 +464,8 @@
         "avg_tokens_success": 61124.8889,
         "avg_api_calls_all": 10.8889,
         "skill_activation_rate": 0.7778,
+        "timeouts": 0,
+        "timeout_rate": 0.0,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -450,6 +486,8 @@
         "avg_tokens_success": 67134.6667,
         "avg_api_calls_all": 11.5556,
         "skill_activation_rate": 0.0,
+        "timeouts": 2,
+        "timeout_rate": 0.2222,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -470,6 +508,8 @@
         "avg_tokens_success": 59490.2222,
         "avg_api_calls_all": 10.0,
         "skill_activation_rate": 0.6667,
+        "timeouts": 0,
+        "timeout_rate": 0.0,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -506,6 +546,8 @@
         "avg_tokens_success": 60775.5,
         "avg_api_calls_all": 14.0,
         "skill_activation_rate": 0.6667,
+        "timeouts": 7,
+        "timeout_rate": 0.7778,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -526,6 +568,8 @@
         "avg_tokens_success": 63231.3333,
         "avg_api_calls_all": 6.4444,
         "skill_activation_rate": 0.6667,
+        "timeouts": 6,
+        "timeout_rate": 0.6667,
         "mcp_calls": {
           "ok": 6,
           "denied": 0,
@@ -546,6 +590,8 @@
         "avg_tokens_success": 71414.1111,
         "avg_api_calls_all": 10.7778,
         "skill_activation_rate": 0.0,
+        "timeouts": 1,
+        "timeout_rate": 0.1111,
         "mcp_calls": {
           "ok": 9,
           "denied": 0,
@@ -566,6 +612,8 @@
         "avg_tokens_success": 254524.0,
         "avg_api_calls_all": 19.4444,
         "skill_activation_rate": 1.0,
+        "timeouts": 9,
+        "timeout_rate": 1.0,
         "mcp_calls": {
           "ok": 0,
           "denied": 0,
@@ -595,5 +643,5 @@
     2,
     3
   ],
-  "taskset_sha256": "d0ab59425305fb747cfdd837b3eba6b36bdc667318165a6bf9c7f959238218c4"
+  "taskset_sha256": "e9dbe23d6434f907e1fa874527558c1c2776ffc0aa7c73f2474b12889b941670"
 }

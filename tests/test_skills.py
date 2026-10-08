@@ -8,10 +8,26 @@ from mini_swe_harness.skills import render_catalog, scan_skills
 def test_scan_builtin_skills() -> None:
     skills, skipped = scan_skills()
     names = {skill.name for skill in skills}
-    assert names == {"pytest-debug", "repo-qa", "mcp-ticket-context"}
+    assert names == {
+        "pytest-debug",
+        "repo-qa",
+        "mcp-ticket-context",
+        "parse-money",
+        "parse-records",
+        "schedule-window",
+    }
     assert skipped == []
     for skill in skills:
         assert "when" in skill.description.lower() or "Use when" in skill.description
+
+
+def test_lift_skill_bodies_not_in_catalog() -> None:
+    skills, _ = scan_skills()
+    catalog = render_catalog(skills)
+    assert "1.005" not in catalog
+    assert "half up" not in catalog.lower()
+    assert "Sunday is closed" not in catalog
+    assert "hour % 24" not in catalog
 
 
 def test_catalog_omits_bodies() -> None:

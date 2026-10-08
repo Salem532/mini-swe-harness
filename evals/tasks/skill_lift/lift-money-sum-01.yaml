@@ -1,0 +1,11 @@
+id: lift-money-sum-01
+category: skill_lift
+expected_skill: parse-money
+prompt: |
+  Fix prices.sum_prices so visible tests pass. It sums decimal price strings
+  as integer cents.
+fixture: evals/fixtures/lift_money_sum_01
+visible_tests: evals/fixtures/lift_money_sum_01/tests
+hidden_tests: evals/graders/lift_money_sum_01
+timeout_s: 180
+max_steps: 30

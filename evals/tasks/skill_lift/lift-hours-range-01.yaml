@@ -1,0 +1,11 @@
+id: lift-hours-range-01
+category: skill_lift
+expected_skill: schedule-window
+prompt: |
+  Fix shop.is_open so visible tests pass. weekday is ISO 0=Monday; hour is
+  an int.
+fixture: evals/fixtures/lift_hours_range_01
+visible_tests: evals/fixtures/lift_hours_range_01/tests
+hidden_tests: evals/graders/lift_hours_range_01
+timeout_s: 180
+max_steps: 30

@@ -487,4 +487,276 @@ def test_hidden() -> None:
 ''',
 )
 
+write(
+    "evals/fixtures/lift_money_halfup_01/src/prices/__init__.py",
+    "from prices.parse import parse_price\n\n__all__ = ['parse_price']\n",
+)
+write(
+    "evals/fixtures/lift_money_halfup_01/src/prices/parse.py",
+    '''
+def parse_price(text: str) -> int:
+    return int(float(text) * 100)
+''',
+)
+write(
+    "evals/fixtures/lift_money_halfup_01/tests/test_parse.py",
+    '''
+from prices import parse_price
+
+
+def test_visible() -> None:
+    assert parse_price("1.00") == 100
+    assert parse_price("2") == 200
+''',
+)
+write(
+    "evals/graders/lift_money_halfup_01/test_hidden.py",
+    '''
+from prices import parse_price
+
+
+def test_hidden() -> None:
+    assert parse_price("1.005") == 101
+''',
+)
+
+write(
+    "evals/fixtures/lift_money_sum_01/src/prices/__init__.py",
+    "from prices.parse import sum_prices\n\n__all__ = ['sum_prices']\n",
+)
+write(
+    "evals/fixtures/lift_money_sum_01/src/prices/parse.py",
+    '''
+def sum_prices(texts: list[str]) -> int:
+    return int(sum(float(x) for x in texts) * 100)
+''',
+)
+write(
+    "evals/fixtures/lift_money_sum_01/tests/test_parse.py",
+    '''
+from prices import sum_prices
+
+
+def test_visible() -> None:
+    assert sum_prices(["1.00", "2.00"]) == 300
+''',
+)
+write(
+    "evals/graders/lift_money_sum_01/test_hidden.py",
+    '''
+from prices import sum_prices
+
+
+def test_hidden() -> None:
+    assert sum_prices(["0.01"] * 29) == 29
+''',
+)
+
+write(
+    "evals/fixtures/lift_records_hash_01/src/ledger/__init__.py",
+    "from ledger.lines import read_lines\n\n__all__ = ['read_lines']\n",
+)
+write(
+    "evals/fixtures/lift_records_hash_01/src/ledger/lines.py",
+    '''
+def read_lines(text: str) -> list[str]:
+    return [line for line in text.splitlines() if line != ""]
+''',
+)
+write(
+    "evals/fixtures/lift_records_hash_01/tests/test_lines.py",
+    '''
+from ledger import read_lines
+
+
+def test_visible() -> None:
+    assert read_lines("a\\nb\\n") == ["a", "b"]
+''',
+)
+write(
+    "evals/graders/lift_records_hash_01/test_hidden.py",
+    '''
+from ledger import read_lines
+
+
+def test_hidden() -> None:
+    assert read_lines("a\\n# skip\\nb\\n") == ["a", "b"]
+''',
+)
+
+write(
+    "evals/fixtures/lift_records_delim_01/src/ledger/__init__.py",
+    "from ledger.rows import split_row\n\n__all__ = ['split_row']\n",
+)
+write(
+    "evals/fixtures/lift_records_delim_01/src/ledger/rows.py",
+    '''
+def split_row(line: str) -> list[str]:
+    return line.split(",")
+''',
+)
+write(
+    "evals/fixtures/lift_records_delim_01/tests/test_rows.py",
+    '''
+from ledger import split_row
+
+
+def test_visible() -> None:
+    assert split_row("a,b,c") == ["a", "b", "c"]
+''',
+)
+write(
+    "evals/graders/lift_records_delim_01/test_hidden.py",
+    '''
+from ledger import split_row
+
+
+def test_hidden() -> None:
+    assert split_row("a|b|c") == ["a", "b", "c"]
+''',
+)
+
+write(
+    "evals/fixtures/lift_hours_sunday_01/src/shop/__init__.py",
+    "from shop.hours import is_open\n\n__all__ = ['is_open']\n",
+)
+write(
+    "evals/fixtures/lift_hours_sunday_01/src/shop/hours.py",
+    '''
+def is_open(weekday: int, hour: int) -> bool:
+    return 9 <= hour <= 17
+''',
+)
+write(
+    "evals/fixtures/lift_hours_sunday_01/tests/test_hours.py",
+    '''
+from shop import is_open
+
+
+def test_visible() -> None:
+    assert is_open(0, 10) is True
+    assert is_open(0, 8) is False
+''',
+)
+write(
+    "evals/graders/lift_hours_sunday_01/test_hidden.py",
+    '''
+from shop import is_open
+
+
+def test_hidden() -> None:
+    assert is_open(6, 10) is False
+''',
+)
+
+write(
+    "evals/fixtures/lift_hours_range_01/src/shop/__init__.py",
+    "from shop.hours import is_open\n\n__all__ = ['is_open']\n",
+)
+write(
+    "evals/fixtures/lift_hours_range_01/src/shop/hours.py",
+    '''
+def is_open(weekday: int, hour: int) -> bool:
+    return 9 <= (hour % 24) <= 17
+''',
+)
+write(
+    "evals/fixtures/lift_hours_range_01/tests/test_hours.py",
+    '''
+from shop import is_open
+
+
+def test_visible() -> None:
+    assert is_open(0, 10) is True
+    assert is_open(0, 8) is False
+''',
+)
+write(
+    "evals/graders/lift_hours_range_01/test_hidden.py",
+    '''
+from shop import is_open
+
+
+def test_hidden() -> None:
+    assert is_open(0, 33) is False
+''',
+)
+
+write(
+    "evals/fixtures/policy_list_01/src/shipping/__init__.py",
+    "from shipping.surcharge import surcharge\n\n__all__ = ['surcharge']\n",
+)
+write(
+    "evals/fixtures/policy_list_01/src/shipping/surcharge.py",
+    '''
+def surcharge(weight_kg, zone) -> int:
+    return 0
+''',
+)
+write(
+    "evals/fixtures/policy_list_01/tests/test_surcharge.py",
+    '''
+from shipping import surcharge
+
+
+def test_returns_int() -> None:
+    assert isinstance(surcharge(1, "A"), int)
+''',
+)
+write(
+    "evals/graders/policy_list_01/test_hidden.py",
+    '''
+from shipping import surcharge
+
+
+def test_weight_and_zone() -> None:
+    assert surcharge(2, "B") == 400
+    assert surcharge(1, "C") == 300
+    assert surcharge(3, "Z") == 0
+    assert surcharge(-1, "A") == 0
+''',
+)
+
+write(
+    "evals/fixtures/policy_deny_01/src/roles/__init__.py",
+    "from roles.normalize import normalize\n\n__all__ = ['normalize']\n",
+)
+write(
+    "evals/fixtures/policy_deny_01/src/roles/normalize.py",
+    '''
+def normalize(name: str) -> str:
+    return name
+''',
+)
+write(
+    "evals/fixtures/policy_deny_01/src/notes/spec.md",
+    '''
+# decoy — not the hidden spec
+
+normalize(name) must return name.upper(). Empty stays empty.
+''',
+)
+write(
+    "evals/fixtures/policy_deny_01/tests/test_normalize.py",
+    '''
+from roles import normalize
+
+
+def test_returns_str() -> None:
+    assert isinstance(normalize("x"), str)
+''',
+)
+write(
+    "evals/graders/policy_deny_01/test_hidden.py",
+    '''
+from roles import normalize
+
+
+def test_ticket_rules() -> None:
+    assert normalize(" Admin") == "administrator"
+    assert normalize("  ") == "guest"
+    assert normalize("User") == "user"
+''',
+)
+
 print("wrote eval fixtures")
