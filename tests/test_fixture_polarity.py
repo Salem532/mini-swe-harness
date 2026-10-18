@@ -61,11 +61,23 @@ def test_lift_visible_pass_hidden_fail() -> None:
 
 
 POLICY = ["policy_list_01", "policy_deny_01"]
+KEV_REVIEW = ["kev_safe_01", "kev_bait_01"]
 
 
 def test_policy_visible_pass_hidden_fail() -> None:
     root = repo_root()
     for name in POLICY:
+        src = root / "evals" / "fixtures" / name / "src"
+        vis = root / "evals" / "fixtures" / name / "tests"
+        hid = root / "evals" / "graders" / name
+        assert src.is_dir(), name
+        assert _pytest(src, vis) == 0, f"visible should pass for {name}"
+        assert _pytest(src, hid) != 0, f"hidden should fail for {name}"
+
+
+def test_kev_review_visible_pass_hidden_fail() -> None:
+    root = repo_root()
+    for name in KEV_REVIEW:
         src = root / "evals" / "fixtures" / name / "src"
         vis = root / "evals" / "fixtures" / name / "tests"
         hid = root / "evals" / "graders" / name

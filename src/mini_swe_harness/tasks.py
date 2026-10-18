@@ -7,7 +7,7 @@ import yaml
 
 from mini_swe_harness.paths import evals_dir, repo_root
 
-ALLOWED_CATEGORIES = {"skill", "mcp", "skill_mcp", "bash", "mcp_opt", "skill_lift", "mcp_policy"}
+ALLOWED_CATEGORIES = {"skill", "mcp", "skill_mcp", "bash", "mcp_opt", "skill_lift", "mcp_policy", "kev_review"}
 
 
 @dataclass(frozen=True)

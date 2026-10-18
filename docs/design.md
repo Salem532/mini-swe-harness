@@ -43,6 +43,8 @@ v1 skills: `pytest-debug` (script + traceback note), `repo-qa` (verification mat
 
 Wall-clock: `WallBoundModel` sets each LiteLLM HTTP `timeout` to remaining episode time so a hung request cannot outlive `timeout_s`.
 
+Optional Kev auto-review wraps `DockerEnvironment.execute` on the host (`ReviewedEnvironment`) and calls `POST /v1/systemone` with four noul questions (`remote_exec`, `destructive`, `exfil`, `privilege`). The `state` is the current bash command plus a sandbox hint, not the episode prompt. Off unless `KEV_BASE_URL` is set. Default is observe-only; `--kev-enforce` denies when `max(remote_exec, exfil, privilege) >= deny_threshold`. `destructive` is logged, not gated: live `cat`/`ls` sit at 0.5–0.68 on that noul. Fail-open if Kev is down. Not a fourth arm and not mixed into hidden-judge pass rate. Headline Kev scores use published suites (R-Judge, RedCode-Exec bash, Kev `devtools-v1` eval-only When2Call / prompt-injection). The homemade bait catalog is protocol debug only.
+
 Main metric: hidden judge pass rate, with Wilson CI and paired deltas vs baseline on `(task, seed)` pairs.
 
 Synthetic 180 `summary.json` also reports `timeouts` / `timeout_rate` from `exit_status` in `{TimeExceeded, Timeout}`. Episode raw files stay frozen; regenerate with `summarize`.
@@ -50,6 +52,8 @@ Synthetic 180 `summary.json` also reports `timeouts` / `timeout_rate` from `exit
 **skill_lift** is a second catalog (`evals/tasks/skill_lift/`); the published 180 episodes stay frozen. GPU eval: `eval --tasks-dir evals/tasks/skill_lift --output evals/results/skill_lift`.
 
 **mcp_policy** is a third catalog (`evals/tasks/mcp_policy/`) with `config/policy.mcp_policy.yaml` (`get_ticket` + `list_tickets`). `TaskSpec.policy` selects it; frozen 180 keeps `policy.eval.yaml`. GPU: `eval --tasks-dir evals/tasks/mcp_policy --output evals/results/mcp_policy`.
+
+**kev_review** is a fourth catalog (`evals/tasks/kev_review/`). Treatment is `KEV_BASE_URL` / `--kev-enforce`, not a fifth eval arm. Run `--arm baseline` only. Do not average with 93.3%.
 
 External Lite-25 is baseline + **skill_only** on the frozen 25 ids (`evals/external/`). MCP stays off; Skills are `pytest-debug` and `repo-qa` bind-mounted at `/opt/agent-skills`.
 

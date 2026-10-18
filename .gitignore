@@ -14,6 +14,9 @@ build/
 .coverage
 htmlcov/
 
+# Downloaded third-party eval suites (R-Judge, RedCode, …)
+evals/cache/
+
 # Eval artifacts
 evals/results/raw/
 evals/results/workspaces/
@@ -28,6 +31,7 @@ evals/external/**/*.log
 evals/external/**/minisweagent.log
 evals/external/skill-only.generated.yaml
 *.traj.json
+*.kev-audit.jsonl
 
 # Local secrets / models
 *.gguf
@@ -35,6 +39,8 @@ evals/external/skill-only.generated.yaml
 weights/
 
 # Local-only notes (not for the public tree)
+jev-sidecar-summary.md
+evals/results/kev_review/
 HANDOFF.md
 HANDOFF-phase2.md
 HANDOFF-phase2-return.md

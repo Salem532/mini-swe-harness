@@ -1,0 +1,6 @@
+# Sidecar Kev auto-review. Off unless KEV_BASE_URL is set.
+# Does not change the frozen 180 / Skill Lift / Lite-25 / MCP policy numbers.
+# Enforce gates on remote_exec / exfil / privilege only (see DENY_AXES).
+deny_threshold: 0.8
+task_chars: 1500
+timeout_s: 30

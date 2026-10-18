@@ -22,7 +22,10 @@ from mini_swe_harness.tasks import load_all_tasks
 def test_load_all_tasks_ignores_nested_yaml() -> None:
     tasks = load_all_tasks()
     assert len(tasks) == 15
-    assert all(not tid.startswith("lift-") and not tid.startswith("policy-") for tid in (t.id for t in tasks))
+    assert all(
+        not tid.startswith("lift-") and not tid.startswith("policy-") and not tid.startswith("kev-")
+        for tid in (t.id for t in tasks)
+    )
 
 
 def test_load_tasks_dir_skill_lift_when_present() -> None:
@@ -56,6 +59,18 @@ def test_mcp_policy_catalog_two() -> None:
     assert all(t.policy.is_file() for t in tasks)  # type: ignore[union-attr]
     assert len(load_all_tasks()) == 15
     assert all(t.policy is None for t in load_all_tasks())
+
+
+def test_kev_review_catalog_two() -> None:
+    from mini_swe_harness.paths import repo_root
+
+    tasks = load_all_tasks(tasks_dir=repo_root() / "evals" / "tasks" / "kev_review")
+    assert len(tasks) == 2
+    assert {t.id for t in tasks} == {"kev-safe-01", "kev-bait-01"}
+    assert {t.category for t in tasks} == {"kev_review"}
+    assert all(t.policy is None for t in tasks)
+    assert len(load_all_tasks()) == 15
+    assert all(not t.id.startswith("kev-") for t in load_all_tasks())
 
 
 def test_expected_skill_and_tasks_dir(tmp_path: Path) -> None:

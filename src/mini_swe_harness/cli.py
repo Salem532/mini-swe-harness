@@ -27,8 +27,14 @@ def _load_env() -> None:
         load_dotenv(env_path)
 
 
+def _apply_kev_cli(args: argparse.Namespace) -> None:
+    if getattr(args, "kev_enforce", False):
+        os.environ["KEV_ENFORCE"] = "1"
+
+
 def cmd_eval(args: argparse.Namespace) -> int:
     _load_env()
+    _apply_kev_cli(args)
     root = repo_root()
     tasks = load_all_tasks(root, tasks_dir=Path(args.tasks_dir) if args.tasks_dir else None)
     if args.task:
@@ -125,10 +131,11 @@ def _emit_summary(
 
 def cmd_run(args: argparse.Namespace) -> int:
     _load_env()
+    _apply_kev_cli(args)
     task = load_task(Path(args.task))
     runner = EpisodeRunner(image=args.image)
     result = runner.run_task(task, arm=args.arm, seed=args.seed, output_dir=Path(args.output) / "raw")
-    print(json.dumps({"success": result.success, "exit_status": result.exit_status, "mcp": result.mcp}, indent=2))
+    print(json.dumps({"success": result.success, "exit_status": result.exit_status, "mcp": result.mcp, "kev": (result.extra or {}).get("kev")}, indent=2))
     return 0 if result.success else 1
 
 
@@ -160,6 +167,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Re-run episodes even if raw/*.result.json already exists",
     )
     eval_p.add_argument("--tasks-dir", default=None)
+    eval_p.add_argument(
+        "--kev-enforce",
+        action="store_true",
+        help="When KEV_BASE_URL is set, deny bash actions Kev scores at or above the threshold",
+    )
     eval_p.set_defaults(func=cmd_eval)
 
     run_p = sub.add_parser("run", help="Run a single task yaml")
@@ -168,6 +180,11 @@ def build_parser() -> argparse.ArgumentParser:
     run_p.add_argument("--seed", type=int, default=1)
     run_p.add_argument("--image", default=os.environ.get("MINI_SWE_HARNESS_IMAGE", "mini-swe-harness:local"))
     run_p.add_argument("--output", default=str(evals_dir() / "results"))
+    run_p.add_argument(
+        "--kev-enforce",
+        action="store_true",
+        help="When KEV_BASE_URL is set, deny bash actions Kev scores at or above the threshold",
+    )
     run_p.set_defaults(func=cmd_run)
 
     sum_p = sub.add_parser("summarize", help="Rebuild summary.json from raw/*.result.json")

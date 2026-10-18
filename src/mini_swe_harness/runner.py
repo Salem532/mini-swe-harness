@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from mini_swe_harness import EVAL_ARMS
+from mini_swe_harness.kev_review import ReviewedEnvironment, maybe_wrap_environment
 from mini_swe_harness.docker_runtime import (
     agent_run_args,
     create_internal_network,
@@ -257,6 +258,7 @@ class EpisodeRunner:
         env = None
         output_dir.mkdir(parents=True, exist_ok=True)
         traj_path = output_dir / f"{task.id}.{arm}.{seed}.traj.json"
+        kev_audit_path = output_dir / f"{task.id}.{arm}.{seed}.kev-audit.jsonl"
         try:
             copy_src(task.src, workspace_src)
             create_internal_network(network)
@@ -287,6 +289,8 @@ class EpisodeRunner:
                 wall_time=task.timeout_s,
                 seed=seed,
                 output_path=traj_path,
+                task_prompt=task.prompt,
+                kev_audit_path=kev_audit_path,
             )
             info = agent.run(task.prompt)
             trajectory = agent.serialize() if hasattr(agent, "serialize") else json.loads(traj_path.read_text())
@@ -315,6 +319,8 @@ class EpisodeRunner:
                 model_name=str(_model_config(seed)["model_name"]),
                 extra={"episode_id": episode_id, "mini_info": info},
             )
+            if isinstance(env, ReviewedEnvironment):
+                row.extra["kev"] = env.summary()
             write_episode_result(output_dir, row)
             return row
         finally:
@@ -329,7 +335,18 @@ class EpisodeRunner:
             if os.environ.get("MINI_SWE_HARNESS_KEEP_WORKSPACE") != "1":
                 shutil.rmtree(work, ignore_errors=True)
 
-    def _build_agent(self, *, templates: dict[str, str], run_args: list[str], step_limit: int, wall_time: int, seed: int, output_path: Path):
+    def _build_agent(
+        self,
+        *,
+        templates: dict[str, str],
+        run_args: list[str],
+        step_limit: int,
+        wall_time: int,
+        seed: int,
+        output_path: Path,
+        task_prompt: str = "",
+        kev_audit_path: Path | None = None,
+    ):
         from minisweagent.agents.default import DefaultAgent
         from minisweagent.environments.docker import DockerEnvironment
         from minisweagent.models import get_model
@@ -348,6 +365,7 @@ class EpisodeRunner:
                 "HOME": "/tmp",
             },
         )
+        env = maybe_wrap_environment(env, task=task_prompt, audit_path=kev_audit_path, root=self.root)
         agent = DefaultAgent(
             model,
             env,
