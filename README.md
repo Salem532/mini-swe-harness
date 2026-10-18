@@ -56,6 +56,8 @@ By category (n=9 each): **bash** and **mcp_opt** are 9/9 on every arm; **skill**
 
 Separate catalog (`evals/tasks/skill_lift/`). Happy path is in the workspace; edge rules live only in three Skills (`parse-money`, `parse-records`, `schedule-window`). Startup prompt injects **name + description** only; the model `cat`s `SKILL.md` on hit. Primary comparison: **skill_only vs baseline**. 6 tasks × 4 arms × 3 seeds = **72** episodes. **Do not average with 93.3%.**
 
+![Skill Lift hidden-judge pass rate](docs/figures/skill-lift-pass-rate.png)
+
 | Arm | Skills | MCP gateway | Pass | Rate | vs baseline |
 |---|---|---|---|---|---|
 | baseline | off | off | 7/18 | **38.9%** | — |
